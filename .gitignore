@@ -1,0 +1,12 @@
+/.idea
+/bin
+/sbin
+/dist
+.DS_Store
+*.db
+/cache
+/debug
+/certs
+/.vscode
+.terraform*
+terraform.tfstate*
