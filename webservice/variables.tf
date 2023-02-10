@@ -16,6 +16,11 @@ variable "port" {
   description = "(Optional) Service ports"
   default = [80]
 }
+variable "advanced" {
+  type        = bool
+  description = "(Optional) Show advanced options"
+  default = false
+}
 variable "cpu" {
   type        = string
   description = "(Optional) CPU"
