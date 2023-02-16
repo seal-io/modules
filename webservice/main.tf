@@ -28,3 +28,11 @@ module "service" {
     protocol      = "TCP"
   }]
 }
+
+data "kubernetes_service" "service" {
+  depends_on = [module.service]
+  metadata {
+    name = var.name
+    namespace = var.namespace
+  }
+}
