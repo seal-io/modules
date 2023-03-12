@@ -1,10 +1,6 @@
-variable "name" {
-  type        = string
-  description = "(Required) App instance name"
-}
 variable "namespace" {
   type        = string
-  description = "(Optional) namespace"
+  description = "(Optional) namespace to deploy"
   default = "default"
 }
 variable "database" {
@@ -21,7 +17,6 @@ variable "password" {
   type        = string
   description = "(Optional) Password"
   default = "mysql"
-  sensitive = true
 }
 variable init_db_script {
   type = string
