@@ -1,42 +1,50 @@
-variable "name" {
-  type        = string
-  description = "(Required) App instance name"
-}
+# @label "Image Name"
+# @group "Basic"
 variable "image" {
   type        = string
-  description = "(Required) Docker image name"
+  description = "Docker image name"
 }
-variable "namespace" {
-  type        = string
-  description = "(Optional) namespace"
-  default = "default"
-}
-variable "port" {
+# @label "Ports"
+# @group "Basic"
+variable "ports" {
   type        = list(number)
-  description = "(Optional) Service ports"
+  description = "Service ports to expose"
   default = [80]
 }
-
+# @label "Environment Variables"
+# @group "Basic"
+variable "env" {
+  type        = map(string)
+  description = "Name and value pairs to set as the environment variables"
+  default     = {}
+}
 # @group "Resources"
 # @label "CPU"
 # @options ["0.5","1","2"]
 variable "cpu" {
   type        = string
-  description = "(Optional) CPU"
+  description = "CPU"
   default = "0.5"
 }
-
 # @group "Resources"
 # @label "Memory"
 # @options ["1Gi","2Gi","4Gi"]
 variable "memory" {
   type        = string
-  description = "(Optional) Memory"
+  description = "Memory"
   default = "512Mi"
 }
-
-variable "env" {
-  type        = map(string)
-  description = "(Optional) Name and value pairs to set as the environment variables"
-  default     = {}
+# @label "Namespace"
+# @group "Advanced"
+variable "namespace" {
+  type        = string
+  description = "Namespace to deploy. Auto-generated if empty."
+  default = ""
+}
+# @label "Deployment Name"
+# @group "Advanced"
+variable "name" {
+  type        = string
+  description = "Name of the deployment resource. Auto-generated if empty."
+  default = ""
 }
