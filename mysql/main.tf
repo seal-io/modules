@@ -1,9 +1,15 @@
-resource "helm_release" "mysql" {
-  name = "mysql-${random_pet.name_suffix.id}"
-  namespace = var.namespace
+resource "random_pet" "namespace" {}
+resource "random_pet" "name_suffix" {}
+resource "random_string" "password" {
+  length           = 16
+}
 
+resource "helm_release" "mysql" {
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "mysql"
+
+  namespace = coalesce(var.namespace, random_pet.namespace.id)
+  name = "mysql-${random_pet.name_suffix.id}"
 
   set {
     name  = "auth.database"
@@ -11,7 +17,7 @@ resource "helm_release" "mysql" {
   }
   set {
     name  = "auth.username"
-    value = coalesce(var.username, "mysql")
+    value = var.username
   }
   set {
     name  = "auth.password"
@@ -19,20 +25,14 @@ resource "helm_release" "mysql" {
   }
   set {
     name  = "initdbScripts.init_script\\.sql"
-    value = var.init_db_script != null && var.init_db_script != "" ? var.init_db_script : ""
+    value = var.init_db_script
   }
 }
-
-resource "random_string" "password" {
-  length           = 16
-}
-
-resource "random_pet" "name_suffix" {}
 
 data "kubernetes_service" "mysql_service" {
   depends_on = [helm_release.mysql]
   metadata {
     name = "mysql-${random_pet.name_suffix.id}"
-    namespace = var.namespace
+    namespace = coalesce(var.namespace, random_pet.namespace.id)
   }
 }

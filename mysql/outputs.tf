@@ -7,7 +7,7 @@ output "db_name" {
 }
 
 output "db_username" {
-  value = coalesce( var.username , "mysql")
+  value = var.username
 }
 
 output "db_password" {

@@ -1,25 +1,35 @@
-variable "namespace" {
-  type        = string
-  description = "(Optional) namespace to deploy"
-  default = "default"
-}
+# @label "Database Name"
+# @group "Basic"
 variable "database" {
   type        = string
-  description = "(Optional) Database name"
+  description = "Database name"
   default = "mysql"
 }
+# @label "Username"
+# @group "Basic"
 variable "username" {
   type        = string
-  description = "(Optional) Username"
+  description = "Username"
   default = "mysql"
 }
+# @label "Password"
+# @group "Basic"
 variable "password" {
   type        = string
-  description = "(Optional) Password"
-  default = "mysql"
+  description = "Password. Auto-generated if empty."
+  default = ""
 }
+# @label "Namespace"
+# @group "Advanced"
+variable "namespace" {
+  type        = string
+  description = "Namespace to deploy. Auto-generated if empty."
+  default = ""
+}
+# @label "Init DB Scripts"
+# @group "Advanced"
 variable init_db_script {
   type = string
-  description = "(Optional) Init db scripts "
-  default = null
+  description = "Init db scripts."
+  default = ""
 }
