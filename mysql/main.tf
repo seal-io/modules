@@ -8,6 +8,7 @@ resource "helm_release" "mysql" {
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "mysql"
 
+  create_namespace = true
   namespace = coalesce(var.namespace, random_pet.namespace.id)
   name = "mysql-${random_pet.name_suffix.id}"
 
