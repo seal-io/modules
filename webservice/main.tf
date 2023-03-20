@@ -30,6 +30,7 @@ module "service" {
 
   app_name      = coalesce(var.name, random_pet.name.id)
   app_namespace = coalesce(var.namespace, random_pet.namespace.id)
+  type          = "NodePort"
   port_mapping     = [for p in var.ports :
   {
     name          = "port-${p}"
