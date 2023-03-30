@@ -2,9 +2,10 @@ resource "random_pet" "namespace" {}
 resource "random_pet" "name" {}
 
 resource "kubernetes_namespace" "ns" {
-  count = var.namespace == "" ? 1 : 0
+  count = var.create_namespace == true ? 1 : 0
+
   metadata {
-    name = random_pet.namespace.id
+    name   = coalesce(var.namespace, random_pet.namespace.id)
   }
 }
 
@@ -22,6 +23,8 @@ module "deployment" {
     limit_memory = var.memory
   }
   env = var.env
+
+  depends_on = [resource.kubernetes_namespace.ns]
 }
 
 module "service" {
@@ -38,6 +41,8 @@ module "service" {
     external_port = p
     protocol      = "TCP"
   }]
+
+  depends_on = [resource.kubernetes_namespace.ns]
 }
 
 data "kubernetes_service" "service" {

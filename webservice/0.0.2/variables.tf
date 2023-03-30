@@ -34,6 +34,13 @@ variable "memory" {
   description = "Memory"
   default = "512Mi"
 }
+# @label "Create namespace"
+# @group "Advanced"
+variable "create_namespace" {
+  type        = bool
+  description = "Create namespace. Default 'true' value will create namespace in cluster. If you want use exist namespace set 'false'"
+  default = true
+}
 # @label "Namespace"
 # @group "Advanced"
 variable "namespace" {
