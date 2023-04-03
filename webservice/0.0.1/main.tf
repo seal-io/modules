@@ -5,7 +5,7 @@ resource "kubernetes_namespace" "ns" {
   count = var.create_namespace == true ? 1 : 0
 
   metadata {
-    name   = coalesce(var.namespace, random_pet.namespace.id)
+    name = coalesce(var.namespace, random_pet.namespace.id)
   }
 }
 
@@ -17,12 +17,12 @@ module "deployment" {
   namespace = coalesce(var.namespace, random_pet.namespace.id)
   image     = var.image
   resources = {
-    request_cpu = var.cpu
-    limit_cpu = var.cpu
-    request_memory = var.memory
-    limit_memory = var.memory
+    request_cpu    = var.request_cpu
+    limit_cpu      = var.limit_cpu
+    request_memory = var.request_memory
+    limit_memory   = var.limit_memory
   }
-  env = var.env
+  env        = var.env
   depends_on = [resource.kubernetes_namespace.ns]
 }
 
@@ -33,12 +33,12 @@ module "service" {
   app_name      = coalesce(var.name, random_pet.name.id)
   app_namespace = coalesce(var.namespace, random_pet.namespace.id)
   type          = "NodePort"
-  port_mapping     = [for p in var.ports :
-  {
-    name          = "port-${p}"
-    internal_port = p
-    external_port = p
-    protocol      = "TCP"
+  port_mapping = [for p in var.ports :
+    {
+      name          = "port-${p}"
+      internal_port = p
+      external_port = p
+      protocol      = "TCP"
   }]
   depends_on = [resource.kubernetes_namespace.ns]
 }
@@ -46,7 +46,7 @@ module "service" {
 data "kubernetes_service" "service" {
   depends_on = [module.service]
   metadata {
-    name = coalesce(var.name, random_pet.name.id)
+    name      = coalesce(var.name, random_pet.name.id)
     namespace = coalesce(var.namespace, random_pet.namespace.id)
   }
 }
