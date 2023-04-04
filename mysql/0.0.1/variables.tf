@@ -3,33 +3,33 @@
 variable "database" {
   type        = string
   description = "Database name"
-  default = "mysql"
+  default     = "mysql"
 }
 # @label "Username"
 # @group "Basic"
 variable "username" {
   type        = string
   description = "Username"
-  default = "mysql"
+  default     = "mysql"
 }
 # @label "Password"
 # @group "Basic"
 variable "password" {
   type        = string
   description = "Password. Auto-generated if empty."
-  default = ""
+  default     = ""
 }
 # @label "Namespace"
 # @group "Advanced"
 variable "namespace" {
   type        = string
   description = "Namespace to deploy. Auto-generated if empty."
-  default = ""
+  default     = ""
 }
 # @label "Init DB Scripts"
 # @group "Advanced"
-variable init_db_script {
-  type = string
+variable "init_db_script" {
+  type        = string
   description = "Init db scripts."
-  default = ""
+  default     = ""
 }
