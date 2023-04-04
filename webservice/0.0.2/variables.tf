@@ -23,14 +23,14 @@ variable "env" {
 variable "request_cpu" {
   type        = string
   description = "CPU request. e.g. 0.5, 1, 2"
-  default     = ""
+  default     = "0.1"
 }
 # @group "Resources"
 # @label "Memory Request"
 variable "request_memory" {
   type        = string
   description = "Memory request. e.g. 128Mi, 512Mi, 1Gi, 2Gi, 4Gi"
-  default     = ""
+  default     = "128Mi"
 }
 # @group "Resources"
 # @label "CPU Limit"
