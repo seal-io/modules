@@ -17,10 +17,10 @@ module "deployment" {
   namespace = coalesce(var.namespace, random_pet.namespace.id)
   image     = var.image
   resources = {
-    request_cpu    = var.request_cpu
-    limit_cpu      = var.limit_cpu
-    request_memory = var.request_memory
-    limit_memory   = var.limit_memory
+    request_cpu    = var.request_cpu == "" ? null : var.request_cpu
+    limit_cpu      = var.limit_cpu == "" ? null : var.limit_cpu
+    request_memory = var.request_memory == "" ? null : var.request_memory
+    limit_memory   = var.limit_memory == "" ? null : var.limit_memory
   }
   env = var.env
 
