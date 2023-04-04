@@ -23,28 +23,28 @@ variable "env" {
 variable "request_cpu" {
   type        = string
   description = "CPU request. e.g. 0.5, 1, 2"
-  default     = "0.1"
+  default     = ""
 }
 # @group "Resources"
 # @label "Memory Request"
 variable "request_memory" {
   type        = string
-  description = "Memory request. e.g. 1Gi, 2Gi, 4Gi"
-  default     = "128Mi"
+  description = "Memory request. e.g. 128Mi, 512Mi 1Gi, 2Gi, 4Gi"
+  default     = ""
 }
 # @group "Resources"
 # @label "CPU Limit"
 variable "limit_cpu" {
   type        = string
   description = "CPU limit. e.g. 0.5, 1, 2"
-  default     = null
+  default     = ""
 }
 # @group "Resources"
 # @label "Memory Limit"
 variable "limit_memory" {
   type        = string
-  description = "Memory limit. e.g. 1Gi, 2Gi, 4Gi"
-  default     = null
+  description = "Memory limit. e.g. 128Mi, 512Mi, 1Gi, 2Gi, 4Gi"
+  default     = ""
 }
 # @label "Create namespace"
 # @group "Advanced"
