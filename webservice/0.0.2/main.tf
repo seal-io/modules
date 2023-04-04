@@ -1,20 +1,36 @@
-resource "random_pet" "namespace" {}
-resource "random_pet" "name" {}
-
-resource "kubernetes_namespace" "ns" {
-  count = var.create_namespace == true ? 1 : 0
-
-  metadata {
-    name = coalesce(var.namespace, random_pet.namespace.id)
+terraform {
+  required_providers {
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = "1.14.0"
+    }
   }
 }
 
+resource "random_string" "name-suffix" {
+  length  = 4
+  special = false
+  lower   = true
+  upper   = false
+}
+
+resource "kubectl_manifest" "ns" {
+  yaml_body = <<YAML
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ${local.namespace}
+YAML
+}
+
 module "deployment" {
+  depends_on = [resource.kubectl_manifest.ns]
+
   source  = "terraform-iaac/deployment/kubernetes"
   version = "1.4.2"
 
-  name      = coalesce(var.name, random_pet.name.id)
-  namespace = coalesce(var.namespace, random_pet.namespace.id)
+  name      = local.name
+  namespace = local.namespace
   image     = var.image
   resources = {
     request_cpu    = var.request_cpu == "" ? null : var.request_cpu
@@ -24,15 +40,17 @@ module "deployment" {
   }
   env = var.env
 
-  depends_on = [resource.kubernetes_namespace.ns]
+  wait_for_rollout = false
 }
 
 module "service" {
+  depends_on = [resource.kubectl_manifest.ns]
+
   source  = "terraform-iaac/service/kubernetes"
   version = "1.0.4"
 
-  app_name      = coalesce(var.name, random_pet.name.id)
-  app_namespace = coalesce(var.namespace, random_pet.namespace.id)
+  app_name      = local.name
+  app_namespace = local.namespace
   type          = "NodePort"
   port_mapping = [for p in var.ports :
     {
@@ -41,14 +59,18 @@ module "service" {
       external_port = p
       protocol      = "TCP"
   }]
-
-  depends_on = [resource.kubernetes_namespace.ns]
 }
 
 data "kubernetes_service" "service" {
   depends_on = [module.service]
+
   metadata {
-    name      = coalesce(var.name, random_pet.name.id)
-    namespace = coalesce(var.namespace, random_pet.namespace.id)
+    name      = local.name
+    namespace = local.namespace
   }
+}
+
+locals {
+  name      = coalesce(var.name, "${var.seal_metadata_application_name}-${var.seal_metadata_application_instance_name}-${var.seal_metadata_module_name}-${random_string.name-suffix.id}")
+  namespace = coalesce(var.namespace, "${var.seal_metadata_project_name}-${var.seal_metadata_application_name}-${var.seal_metadata_application_instance_name}")
 }

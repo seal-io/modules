@@ -46,13 +46,6 @@ variable "limit_memory" {
   description = "Memory limit. e.g. 128Mi, 512Mi, 1Gi, 2Gi, 4Gi"
   default     = ""
 }
-# @label "Create namespace"
-# @group "Advanced"
-variable "create_namespace" {
-  type        = bool
-  description = "Create namespace. Default 'true' value will create namespace in cluster. If you want use exist namespace set 'false'"
-  default     = true
-}
 # @label "Namespace"
 # @group "Advanced"
 variable "namespace" {
@@ -65,5 +58,29 @@ variable "namespace" {
 variable "name" {
   type        = string
   description = "Name of the deployment resource. Auto-generated if empty."
+  default     = ""
+}
+# @hidden
+variable "seal_metadata_application_name" {
+  type        = string
+  description = "Seal metadata application name."
+  default     = ""
+}
+# @hidden
+variable "seal_metadata_application_instance_name" {
+  type        = string
+  description = "Seal metadata application instance name."
+  default     = ""
+}
+# @hidden
+variable "seal_metadata_project_name" {
+  type        = string
+  description = "Seal metadata project name."
+  default     = ""
+}
+# @hidden
+variable "seal_metadata_module_name" {
+  type        = string
+  description = "Seal metadata module name."
   default     = ""
 }
