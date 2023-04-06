@@ -4,6 +4,7 @@ This module provides a simplified way to deploy a MySQL database in a Kubernetes
 
 The module also generate the MySQL database access endpoint to output. 
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 No requirements.
@@ -25,8 +26,6 @@ No modules.
 | Name | Type |
 |------|------|
 | [helm_release.mysql](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
-| [random_pet.name_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/pet) | resource |
-| [random_pet.namespace](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/pet) | resource |
 | [random_string.password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 | [kubernetes_service.mysql_service](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/service) | data source |
 
@@ -48,3 +47,4 @@ No modules.
 | <a name="output_db_name"></a> [db\_name](#output\_db\_name) | n/a |
 | <a name="output_db_password"></a> [db\_password](#output\_db\_password) | n/a |
 | <a name="output_db_username"></a> [db\_username](#output\_db\_username) | n/a |
+<!-- END_TF_DOCS -->
