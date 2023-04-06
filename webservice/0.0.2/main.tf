@@ -64,6 +64,6 @@ data "kubernetes_service" "service" {
 }
 
 locals {
-  name      = coalesce(var.name, "${var.seal_metadata_application_name}-${var.seal_metadata_application_instance_name}-${var.seal_metadata_module_name}")
+  name      = coalesce(var.name, "${var.seal_metadata_module_name}")
   namespace = coalesce(var.namespace, "${var.seal_metadata_project_name}-${var.seal_metadata_application_name}-${var.seal_metadata_application_instance_name}")
 }

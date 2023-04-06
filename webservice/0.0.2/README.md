@@ -4,17 +4,19 @@ This module provides an efficient way to create a Kubernetes deployment and serv
 
 It will generate an access endpoint as output for your web service, allowing it to be accessed from other services or applications.
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | 1.14.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | n/a |
+| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.14.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.19.0 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.4.3 |
 
 ## Modules
 
@@ -27,8 +29,7 @@ No requirements.
 
 | Name | Type |
 |------|------|
-| [kubectl_manifest.ns](https://registry.terraform.io/providers/hashicorp/kubectl/latest/docs/resources/manifest) | resource |
-| [random_string.name-suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
+| [kubectl_manifest.ns](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
 | [kubernetes_service.service](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/service) | data source |
 
 ## Inputs
@@ -42,8 +43,8 @@ No requirements.
 | <a name="input_name"></a> [name](#input\_name) | Name of the deployment resource. Auto-generated if empty. | `string` | `""` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace to deploy. Auto-generated if empty. | `string` | `""` | no |
 | <a name="input_ports"></a> [ports](#input\_ports) | Service ports to expose | `list(number)` | <pre>[<br>  80<br>]</pre> | no |
-| <a name="input_request_cpu"></a> [request\_cpu](#input\_request\_cpu) | CPU request. e.g. 0.5, 1, 2 | `string` | `""` | no |
-| <a name="input_request_memory"></a> [request\_memory](#input\_request\_memory) | Memory request. e.g. 128Mi, 512Mi, 1Gi, 2Gi, 4Gi | `string` | `""` | no |
+| <a name="input_request_cpu"></a> [request\_cpu](#input\_request\_cpu) | CPU request. e.g. 0.5, 1, 2 | `string` | `"0.1"` | no |
+| <a name="input_request_memory"></a> [request\_memory](#input\_request\_memory) | Memory request. e.g. 128Mi, 512Mi, 1Gi, 2Gi, 4Gi | `string` | `"128Mi"` | no |
 
 ## Outputs
 
@@ -51,4 +52,4 @@ No requirements.
 |------|-------------|
 | <a name="output_ports"></a> [ports](#output\_ports) | Service Ports |
 | <a name="output_service_ip"></a> [service\_ip](#output\_service\_ip) | Service IP |
-
+<!-- END_TF_DOCS -->
