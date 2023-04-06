@@ -1,5 +1,3 @@
-resource "random_pet" "namespace" {}
-resource "random_pet" "name_suffix" {}
 resource "random_string" "password" {
   length = 16
 }
@@ -9,8 +7,8 @@ resource "helm_release" "mysql" {
   chart      = "mysql"
 
   create_namespace = true
-  namespace        = coalesce(var.namespace, random_pet.namespace.id)
-  name             = "mysql-${random_pet.name_suffix.id}"
+  namespace        = local.namespace
+  name             = local.name
 
   set {
     name  = "auth.database"
@@ -33,7 +31,12 @@ resource "helm_release" "mysql" {
 data "kubernetes_service" "mysql_service" {
   depends_on = [helm_release.mysql]
   metadata {
-    name      = "mysql-${random_pet.name_suffix.id}"
-    namespace = coalesce(var.namespace, random_pet.namespace.id)
+    name      = local.name
+    namespace = local.namespace
   }
+}
+
+locals {
+  name      = var.seal_metadata_module_name
+  namespace = coalesce(var.namespace, "${var.seal_metadata_project_name}-${var.seal_metadata_application_name}-${var.seal_metadata_application_instance_name}")
 }
