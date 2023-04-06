@@ -31,7 +31,7 @@ resource "helm_release" "mysql" {
 data "kubernetes_service" "mysql_service" {
   depends_on = [helm_release.mysql]
   metadata {
-    name      = local.name
+    name      = "${local.name}-mysql"
     namespace = local.namespace
   }
 }
