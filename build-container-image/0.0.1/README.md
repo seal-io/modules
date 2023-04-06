@@ -1,6 +1,6 @@
-# Build Docker Images
+# Build Container Image
 
-Kaniko is an open-source tool that provides a secure way to build Docker images without requiring a Docker daemon. This module utilizes the power of Kaniko to build Docker images using a Dockerfile fetched from GitHub.
+Kaniko is an open-source tool that provides a secure way to build container image without requiring a Docker daemon. This module utilizes the power of Kaniko to build container image using a Dockerfile fetched from GitHub.
 
 This module will also generate to image name to output.
 
