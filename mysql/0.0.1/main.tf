@@ -1,5 +1,6 @@
 resource "random_string" "password" {
-  length = 16
+  length  = 16
+  special = false
 }
 
 resource "helm_release" "mysql" {
@@ -10,6 +11,10 @@ resource "helm_release" "mysql" {
   namespace        = local.namespace
   name             = local.name
 
+  set {
+    name  = "fullnameOverride"
+    value = local.name
+  }
   set {
     name  = "auth.database"
     value = var.database
@@ -31,12 +36,12 @@ resource "helm_release" "mysql" {
 data "kubernetes_service" "mysql_service" {
   depends_on = [helm_release.mysql]
   metadata {
-    name      = "${local.name}-mysql"
+    name      = local.name
     namespace = local.namespace
   }
 }
 
 locals {
-  name      = var.seal_metadata_module_name
+  name      = "${var.seal_metadata_module_name}-mysql"
   namespace = coalesce(var.namespace, "${var.seal_metadata_project_name}-${var.seal_metadata_application_name}-${var.seal_metadata_application_instance_name}")
 }
