@@ -1,5 +1,6 @@
 resource "random_string" "password" {
-  length = 16
+  length  = 16
+  special = false
 }
 
 resource "helm_release" "mysql" {
