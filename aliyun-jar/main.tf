@@ -9,7 +9,7 @@ variable "instance_type" {
 
 variable "image_id" {
   description = "The ID of the image used to launch the ECS instance"
-  default     = "ubuntu_18_04_64_20G_alibase_20200914.vhd"
+  default     = "ubuntu_22_04_x64_20G_alibase_20230208.vhd"
 }
 
 variable "system_disk_category" {
@@ -23,7 +23,7 @@ variable "system_disk_size" {
 }
 
 variable "internet_charge_type" {
-  description = "The billing method for the public network bandwidth"
+  description = "The billing method of the public network bandwidth"
   default     = "PayByTraffic"
 }
 
@@ -41,48 +41,44 @@ resource "alicloud_instance" "example" {
   internet_charge_type = var.internet_charge_type
   internet_max_bandwidth_out = var.internet_max_bandwidth_out
 
-  security_groups      = [alicloud_security_group.example.id]
-  vswitch_id           = alicloud_vswitch.example.id
+  vswitch_id = data.alicloud_vswitches.default.vswitches.0.id
+  
+  key_name = "lawrence"
+
+  security_groups = [
+    data.alicloud_security_groups.default.groups.0.id
+  ]
 
   user_data = <<-EOF
               #!/bin/bash
-              wget ${var.jar_url} -O /home/admin/example.jar
-              java -jar /home/admin/example.jar
+              apt update && apt install openjdk-17-jre-headless -y
+              wget -O example.jar ${var.jar_url}
+              java -jar example.jar
               EOF
 }
 
-resource "alicloud_security_group" "example" {
-  name        = "example-security-group"
-  description = "Example security group"
-
-  ingress {
-    action      = "accept"
-    protocol    = "tcp"
-    port_range  = "22/22"
-    cidr_ip     = "0.0.0.0/0"
-  }
-
-  ingress {
-    action      = "accept"
-    protocol    = "tcp"
-    port_range  = "8080/8080"
-    cidr_ip     = "0.0.0.0/0"
-  }
-
-  egress {
-    action      = "accept"
-    protocol    = "all"
-    cidr_ip     = "0.0.0.0/0"
-  }
+data "alicloud_vpcs" "default" {
+  name_regex = "default"
 }
 
-resource "alicloud_vpc" "example" {
-  name       = "example-vpc"
-  cidr_block = "10.0.0.0/8"
+data "alicloud_vswitches" "default" {
+  vpc_id = data.alicloud_vpcs.default.vpcs.0.id
 }
 
-resource "alicloud_vswitch" "example" {
-  vpc_id            = alicloud_vpc.example.id
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = "cn-hangzhou-b"
+data "alicloud_security_groups" "default" {
+  name_regex = "default"
+}
+
+resource "null_resource" "health_check" {
+  depends_on = [
+    alicloud_instance.example,
+  ]
+
+  provisioner "local-exec" {
+    command     = "for i in `seq 1 60`; do if `command -v wget > /dev/null`; then wget --no-check-certificate -O - -q $ENDPOINT >/dev/null && exit 0 || true; else curl -k -s $ENDPOINT >/dev/null && exit 0 || true;fi; sleep 5; done; echo TIMEOUT && exit 1"
+    interpreter = ["/bin/sh", "-c"]
+    environment = {
+      ENDPOINT = "http://${alicloud_instance.example.public_ip}:8888"
+    }
+  }
 }
