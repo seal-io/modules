@@ -9,7 +9,7 @@ data "alicloud_db_instance_classes" "default" {
   storage_type   = var.instance_storage_type
 }
 module "mysql" {
-  source = "github.com/seal-demo/modules//aliyun-rds"
+  source = "github.com/seal-demo//modules/aliyun-rds"
   #################
   # Rds Instance
   #################
