@@ -9,7 +9,7 @@ data "alicloud_db_instance_classes" "default" {
   storage_type   = var.instance_storage_type
 }
 module "mysql" {
-  source = "terraform-alicloud-modules/rds/alicloud//mysql-8.0-basic"
+  source = "github.com/terraform-alicloud-modules/terraform-alicloud-rds//modules/mysql-8.0-basic"
   #################
   # Rds Instance
   #################
