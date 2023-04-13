@@ -1,5 +1,6 @@
 variable "jar_url" {
   description = "The URL of the Jar package to be deployed"
+  default     = "https://seal-demo-1303613262.cos.ap-guangzhou.myqcloud.com/example.jar"
 }
 
 variable "instance_type" {
@@ -33,7 +34,7 @@ variable "internet_max_bandwidth_out" {
 }
 
 resource "alicloud_instance" "example" {
-  instance_name        = "example-instance"
+  instance_name        = "demo-instance"
   instance_type        = var.instance_type
   image_id             = var.image_id
   system_disk_category = var.system_disk_category
@@ -43,7 +44,7 @@ resource "alicloud_instance" "example" {
 
   vswitch_id = data.alicloud_vswitches.default.vswitches.0.id
   
-  key_name = "lawrence"
+  key_name = "seal-demo"
 
   security_groups = [
     data.alicloud_security_groups.default.groups.0.id
