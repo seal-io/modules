@@ -9,7 +9,7 @@ variable "instance_type" {
 
 variable "image_id" {
   description = "The ID of the image used to launch the ECS instance"
-  default     = "ubuntu_22_04_x64_20G_alibase_20230208.vhd"
+  default     = "ubuntu_18_04_arm64_20G_alibase_20230104.vhd"
 }
 
 variable "system_disk_category" {
