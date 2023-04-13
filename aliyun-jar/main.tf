@@ -4,12 +4,12 @@ variable "jar_url" {
 
 variable "instance_type" {
   description = "The instance type of the ECS instance"
-  default     = "ecs.t5-lc1m2.small"
+  default     = "ecs.s6-c1m2.small"
 }
 
 variable "image_id" {
   description = "The ID of the image used to launch the ECS instance"
-  default     = "ubuntu_18_04_arm64_20G_alibase_20230104.vhd"
+  default     = "ubuntu_18_04_x64_20G_alibase_20230208.vhd"
 }
 
 variable "system_disk_category" {
