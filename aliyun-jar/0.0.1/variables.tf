@@ -1,3 +1,5 @@
+# @label "Jar包下载地址"
+# @group "基础"
 variable "jar_url" {
   description = "The URL of the Jar package to be deployed"
   default     = "https://seal-demo-1303613262.cos.ap-guangzhou.myqcloud.com/example.jar"
