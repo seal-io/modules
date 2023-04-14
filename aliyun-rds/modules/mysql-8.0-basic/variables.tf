@@ -167,7 +167,7 @@ variable "create_database" {
   default     = true
 }
 # @group "RDS Database"
-# @@hidden
+# @hidden
 variable "databases" {
   description = "A list mapping used to add multiple databases. Each item supports keys: name, character_set and description. It should be set when create_database = true."
   type        = list(map(string))
