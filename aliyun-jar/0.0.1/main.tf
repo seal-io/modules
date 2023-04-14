@@ -1,38 +1,3 @@
-variable "jar_url" {
-  description = "The URL of the Jar package to be deployed"
-  default     = "https://seal-demo-1303613262.cos.ap-guangzhou.myqcloud.com/example.jar"
-}
-
-variable "instance_type" {
-  description = "The instance type of the ECS instance"
-  default     = "ecs.s6-c1m2.small"
-}
-
-variable "image_id" {
-  description = "The ID of the image used to launch the ECS instance"
-  default     = "ubuntu_18_04_x64_20G_alibase_20230208.vhd"
-}
-
-variable "system_disk_category" {
-  description = "The category of the system disk"
-  default     = "cloud_efficiency"
-}
-
-variable "system_disk_size" {
-  description = "The size of the system disk"
-  default     = 40
-}
-
-variable "internet_charge_type" {
-  description = "The billing method of the public network bandwidth"
-  default     = "PayByTraffic"
-}
-
-variable "internet_max_bandwidth_out" {
-  description = "The maximum outbound bandwidth of the public network"
-  default     = 5
-}
-
 resource "alicloud_instance" "example" {
   instance_name        = "demo-instance"
   instance_type        = var.instance_type
