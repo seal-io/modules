@@ -168,7 +168,6 @@ variable "password" {
 # @group "RDS Database Account"
 # @label "Type"
 # @show_if "create_account=true"
-# @options ["Normal", "High privilege"]
 variable "type" {
   description = "Privilege type of account. Normal: Common privilege. Super: High privilege. Default to Normal."
   type        = list(string)
@@ -177,7 +176,6 @@ variable "type" {
 # @group "RDS Database Account"
 # @label "Privilege"
 # @show_if "create_account=true"
-# @options ["ReadWrite", "ReadOnly"]
 variable "privilege" {
   description = "The privilege of one account access database."
   type        = list(string)
