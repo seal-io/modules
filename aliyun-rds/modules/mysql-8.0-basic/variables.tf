@@ -9,10 +9,8 @@ variable "instance_name" {
 }
 # @group "RDS Instance"
 # @label "Instance Charge Type"
-# @options ["Postpaid", "Prepaid"]
 variable "instance_charge_type" {
   description = "The instance charge type. Valid values: Prepaid and Postpaid. Default to Postpaid."
-  type        = list(string)
   default     = "Postpaid"
 }
 # @group "RDS Instance"
@@ -170,7 +168,6 @@ variable "password" {
 # @show_if "create_account=true"
 variable "type" {
   description = "Privilege type of account. Normal: Common privilege. Super: High privilege. Default to Normal."
-  type        = list(string)
   default     = "Normal"
 }
 # @group "RDS Database Account"
@@ -178,7 +175,6 @@ variable "type" {
 # @show_if "create_account=true"
 variable "privilege" {
   description = "The privilege of one account access database."
-  type        = list(string)
   default     = "ReadWrite"
 }
 
