@@ -1,10 +1,13 @@
 #################
-# Rds Instance
+# RDS Instance
 #################
+# @group "RDS Instance"
 variable "instance_name" {
   description = "The name of DB instance. A random name prefixed with 'terraform-rds-' will be set if it is empty."
   default     = ""
 }
+
+# @options ["Postpaid", "Prepaid"]
 variable "instance_charge_type" {
   description = "The instance charge type. Valid values: Prepaid and Postpaid. Default to Postpaid."
   default     = "Postpaid"
@@ -53,8 +56,9 @@ variable "sql_collector_config_value" {
 }
 
 #################
-# Rds Backup policy
+# RDS Backup Policy
 #################
+# @group "RDS Backup Policy"
 variable "preferred_backup_period" {
   description = "DB Instance backup period."
   type        = list(string)
@@ -74,6 +78,8 @@ variable "enable_backup_log" {
   type        = bool
   default     = true
 }
+
+# @show_if "enable_backup_log=true"
 variable "log_backup_retention_period" {
   description = "Instance log backup retention days. Valid values: [7-730]. Default to 7. It can be larger than 'retention_period'."
   type        = number
@@ -81,8 +87,9 @@ variable "log_backup_retention_period" {
 }
 
 #################
-# Rds Connection
+# RDS Connection
 #################
+# @group "RDS Connection"
 variable "allocate_public_connection" {
   description = "Whether to allocate public connection for a RDS instance. If true, the connection_prefix can not be empty."
   type        = bool
@@ -100,38 +107,53 @@ variable "port" {
 }
 
 #################
-# Rds Database account
+# RDS Database Account
 #################
+# @group "RDS Database Account"
+# @options [true, false]
 variable "create_account" {
   description = "Whether to create a new account. If true, the `account_name` should not be empty."
   type        = bool
   default     = true
 }
+
+# @show_if "create_account=true"
 variable "account_name" {
   description = "Name of a new database account. It should be set when create_account = true."
   default     = "demo"
 }
+
+# @show_if "create_account=true"
 variable "password" {
   description = "Operation database account password. It may consist of letters, digits, or underlines, with a length of 6 to 32 characters."
   default     = "Seal@123"
 }
+
+# @show_if "create_account=true"
+# @options ["Normal", "High privilege"]
 variable "type" {
-  description = "Privilege type of account. Normal: Common privilege. Super: High privilege.Default to Normal."
+  description = "Privilege type of account. Normal: Common privilege. Super: High privilege. Default to Normal."
   default     = "Normal"
 }
+
+# @show_if "create_account=true"
+# @options ["ReadWrite", "ReadOnly"]
 variable "privilege" {
   description = "The privilege of one account access database."
   default     = "ReadWrite"
 }
 
 #################
-# Rds Database
+# RDS Database
 #################
+# @group "RDS Database"
 variable "create_database" {
   description = "Whether to create multiple databases. If true, the `databases` should not be empty."
   type        = bool
   default     = true
 }
+
+# @@hidden
 variable "databases" {
   description = "A list mapping used to add multiple databases. Each item supports keys: name, character_set and description. It should be set when create_database = true."
   type        = list(map(string))
