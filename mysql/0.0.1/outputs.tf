@@ -11,5 +11,5 @@ output "db_username" {
 }
 
 output "db_password" {
-  value = coalesce( var.password , random_string.password.result)
+  value = coalesce(var.password, random_string.password.result)
 }

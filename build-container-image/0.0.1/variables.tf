@@ -8,13 +8,13 @@ variable "git_url" {
 # @group "Source"
 variable "git_branch" {
   type        = string
-  default = "main"
+  default     = "main"
   description = "Branch of the repository to clone."
 }
 # @label "Authentication"
 # @group "Source"
 variable "git_auth" {
-  type        = bool
+  type    = bool
   default = false
 }
 # @label "Username"
@@ -22,8 +22,8 @@ variable "git_auth" {
 # @show_if "git_auth=true"
 variable "git_username" {
   type        = string
-  default = null
-  sensitive = true
+  default     = null
+  sensitive   = true
   description = "Username for cloning the git repository."
 }
 # @label "Password"
@@ -31,8 +31,8 @@ variable "git_username" {
 # @show_if "git_auth=true"
 variable "git_password" {
   type        = string
-  default = null
-  sensitive = true
+  default     = null
+  sensitive   = true
   description = "Password for cloning the git repository."
 }
 # @label "Sub Path"
@@ -47,7 +47,7 @@ variable "git_path" {
 # @group "Build"
 variable "dockerfile" {
   type        = string
-  default = "Dockerfile"
+  default     = "Dockerfile"
   description = "Path to the Dockerfile."
 }
 # @label "Image Name"
@@ -59,7 +59,7 @@ variable "image" {
 # @label "Registry Authentication"
 # @group "Build"
 variable "registry_auth" {
-  type        = bool
+  type    = bool
   default = false
 }
 # @label "Username"
@@ -67,8 +67,8 @@ variable "registry_auth" {
 # @show_if "registry_auth=true"
 variable "registry_username" {
   type        = string
-  default = null
-  sensitive = true
+  default     = null
+  sensitive   = true
   description = "Username for the image registry."
 }
 # @label "Password"
@@ -76,7 +76,7 @@ variable "registry_username" {
 # @show_if "registry_auth=true"
 variable "registry_password" {
   type        = string
-  default = null
-  sensitive = true
+  default     = null
+  sensitive   = true
   description = "Password for the image registry."
 }
