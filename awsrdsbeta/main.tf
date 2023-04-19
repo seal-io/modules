@@ -38,10 +38,6 @@ variable "db_security_group_ids" {
   description = "List of security group IDs to be associated with the RDS instance"
 }
 
-variable "db_parameter_group_name" {
-  description = "Name of the DB parameter group"
-}
-
 variable "db_backup_retention_period" {
   description = "Number of days to retain backups for"
   default     = 7
@@ -67,7 +63,6 @@ resource "aws_db_instance" "rds_instance" {
   password             = var.db_password
   db_subnet_group_name = var.db_subnet_group_name
   vpc_security_group_ids = var.db_security_group_ids
-  db_parameter_group_name = var.db_parameter_group_name
   backup_retention_period = var.db_backup_retention_period
   multi_az             = var.db_multi_az
   tags                 = var.db_tags
