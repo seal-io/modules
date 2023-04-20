@@ -28,7 +28,7 @@ data "kubectl_flie_documents" "docs" {
 resource "kubectl_manifest" "manifest" {
   depends_on = [kubectl_manifest.namespace]
 
-  for_each  = toset(data.kubectl_file_documents.docs.manifests)
+  for_each  = data.kubectl_file_documents.docs.manifests
   yaml_body = each.value
 }
 
