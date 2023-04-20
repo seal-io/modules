@@ -32,7 +32,7 @@ resource "kubectl_manifest" "manifest" {
   yaml_body = element(data.kubectl_path_documents.manifest.documents, count.index)
 }
 
-data "kubernetes_service" "service" {
+data "kubernetes_service" "frontend_service" {
   depends_on = [kubectl_manifest.manifest]
 
   metadata {
