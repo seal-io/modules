@@ -18,7 +18,7 @@ YAML
 }
 
 data "kubectl_path_documents" "manifest" {
-  pattern = "./online-boutique-manifests.yaml"
+  pattern = "${path.module}/online-boutique-manifests.yaml"
   vars = {
     namespace        = local.namespace 
     image_registry   = var.image_registry
