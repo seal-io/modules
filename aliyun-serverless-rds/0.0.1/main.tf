@@ -17,7 +17,7 @@ data "alicloud_db_instance_classes" "example" {
 }
 
 resource "alicloud_vpc" "example" {
-  vpc_name   = var.instance_:qname
+  vpc_name   = var.instance_name
   cidr_block = "172.16.0.0/16"
 }
 
@@ -52,3 +52,4 @@ resource "alicloud_db_database" "example" {
   instance_id = alicloud_db_instance.instance.id
   name        = var.db_name
 }
+

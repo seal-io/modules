@@ -12,3 +12,4 @@ output "example_db_instance_connection_string" {
   description = "Rds instance public connection string"
   value       = concat(alicloud_db_instance.example.*.connection_string, [""])[0]
 }
+

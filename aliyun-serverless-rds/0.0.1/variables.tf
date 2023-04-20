@@ -9,7 +9,7 @@ variable "db_name" {
 }
 
 variable "allocate_public_connection" {
-  decription = "是否开通数据库互联网访问"
+  description = "是否开通数据库互联网访问"
   type    = bool
   default = true
 }
