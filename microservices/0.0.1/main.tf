@@ -18,11 +18,6 @@ YAML
 
 data "kubectl_file_documents" "docs" {
   content    = file("online-boutique-manifests.yaml")
-  vars       = {
-    namespace        = local.namespace
-    image_registry   = var.image_registry
-    image_repository = var.image_repository
-  }
 }
 
 resource "kubectl_manifest" "manifest" {

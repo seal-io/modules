@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: emailservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   selector:
     matchLabels:
@@ -29,7 +29,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/emailservice:v0.6.0
+        image: ${var.image_registry}/${var.image_repository}/emailservice:v0.6.0
         ports:
         - containerPort: 8080
         env:
@@ -57,7 +57,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: emailservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   type: ClusterIP
   selector:
@@ -71,7 +71,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: checkoutservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   selector:
     matchLabels:
@@ -96,7 +96,7 @@ spec:
                 - ALL
             privileged: false
             readOnlyRootFilesystem: true
-          image: ${image_registry}/${image_repository}/checkoutservice:v0.6.0
+          image: ${var.image_registry}/${var.image_repository}/checkoutservice:v0.6.0
           ports:
           - containerPort: 5050
           readinessProbe:
@@ -132,7 +132,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: checkoutservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   type: ClusterIP
   selector:
@@ -146,7 +146,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: recommendationservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   selector:
     matchLabels:
@@ -172,7 +172,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/recommendationservice:v0.6.0
+        image: ${var.image_registry}/${var.image_repository}/recommendationservice:v0.6.0
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -202,7 +202,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: recommendationservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   type: ClusterIP
   selector:
@@ -216,7 +216,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   selector:
     matchLabels:
@@ -243,7 +243,7 @@ spec:
                 - ALL
             privileged: false
             readOnlyRootFilesystem: true
-          image: ${image_registry}/${image_repository}/frontend:v0.6.0
+          image: ${var.image_registry}/${var.image_repository}/frontend:v0.6.0
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -299,7 +299,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   type: ClusterIP
   selector:
@@ -313,7 +313,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend-external
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   type: NodePort
   selector:
@@ -327,7 +327,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: paymentservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   selector:
     matchLabels:
@@ -353,7 +353,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/paymentservice:v0.6.0
+        image: ${var.image_registry}/${var.image_repository}/paymentservice:v0.6.0
         ports:
         - containerPort: 50051
         env:
@@ -379,7 +379,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: paymentservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   type: ClusterIP
   selector:
@@ -393,7 +393,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: productcatalogservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   selector:
     matchLabels:
@@ -419,7 +419,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/productcatalogservice:v0.6.0
+        image: ${var.image_registry}/${var.image_repository}/productcatalogservice:v0.6.0
         ports:
         - containerPort: 3550
         env:
@@ -445,7 +445,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: productcatalogservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   type: ClusterIP
   selector:
@@ -459,7 +459,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cartservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   selector:
     matchLabels:
@@ -485,7 +485,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/cartservice:v0.6.0
+        image: ${var.image_registry}/${var.image_repository}/cartservice:v0.6.0
         ports:
         - containerPort: 7070
         env:
@@ -512,7 +512,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cartservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   type: ClusterIP
   selector:
@@ -526,7 +526,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: loadgenerator
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   selector:
     matchLabels:
@@ -579,7 +579,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/loadgenerator:v0.6.0
+        image: ${var.image_registry}/${var.image_repository}/loadgenerator:v0.6.0
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"
@@ -597,7 +597,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: currencyservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   selector:
     matchLabels:
@@ -623,7 +623,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/currencyservice:v0.6.0
+        image: ${var.image_registry}/${var.image_repository}/currencyservice:v0.6.0
         ports:
         - name: grpc
           containerPort: 7000
@@ -650,7 +650,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: currencyservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   type: ClusterIP
   selector:
@@ -664,7 +664,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: shippingservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   selector:
     matchLabels:
@@ -689,7 +689,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/shippingservice:v0.6.0
+        image: ${var.image_registry}/${var.image_repository}/shippingservice:v0.6.0
         ports:
         - containerPort: 50051
         env:
@@ -716,7 +716,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: shippingservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   type: ClusterIP
   selector:
@@ -730,7 +730,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis-cart
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   selector:
     matchLabels:
@@ -783,7 +783,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: redis-cart
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   type: ClusterIP
   selector:
@@ -797,7 +797,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: adservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   selector:
     matchLabels:
@@ -823,7 +823,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/adservice:v0.6.0
+        image: ${var.image_registry}/${var.image_repository}/adservice:v0.6.0
         ports:
         - containerPort: 9555
         env:
@@ -851,7 +851,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: adservice
-  namespace: ${namespace}
+  namespace: ${var.namespace}
 spec:
   type: ClusterIP
   selector:
