@@ -1,5 +1,12 @@
-variable "name" {
+variable "instance_name" {
+  description = "数据库实例名称"
   default = "seal-demo-serverless"
+}
+
+variable "allocate_public_connection" {
+  decription = "是否开通数据库互联网访问"
+  type    = bool
+  default = true
 }
 
 data "alicloud_db_zones" "example" {
@@ -21,7 +28,7 @@ data "alicloud_db_instance_classes" "example" {
 }
 
 resource "alicloud_vpc" "example" {
-  vpc_name   = var.name
+  vpc_name   = var.instance_:qname
   cidr_block = "172.16.0.0/16"
 }
 
@@ -29,7 +36,7 @@ resource "alicloud_vswitch" "example" {
   vpc_id       = alicloud_vpc.example.id
   cidr_block   = "172.16.0.0/24"
   zone_id      = data.alicloud_db_zones.example.ids.1
-  vswitch_name = var.name
+  vswitch_name = var.instance_name
 }
 
 resource "alicloud_db_instance" "example" {
@@ -38,7 +45,7 @@ resource "alicloud_db_instance" "example" {
   instance_storage         = data.alicloud_db_instance_classes.example.instance_classes.0.storage_range.min
   instance_type            = data.alicloud_db_instance_classes.example.instance_classes.0.instance_class
   instance_charge_type     = "Serverless"
-  instance_name            = var.name
+  instance_name            = var.instance_name
   zone_id                  = data.alicloud_db_zones.example.ids.1
   vswitch_id               = alicloud_vswitch.example.id
   db_instance_storage_type = "cloud_essd"
