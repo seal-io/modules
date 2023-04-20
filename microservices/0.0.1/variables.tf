@@ -23,7 +23,7 @@ variable "image_repository" {
 }
 
 # @hidden
-variable "frontend_svc_name" {
+variable "frontend_service_name" {
   type        = string
   description = "Access service name"
   default     = "frontend-external"
