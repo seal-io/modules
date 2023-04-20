@@ -1,7 +1,7 @@
 # @group "Kubernetes Configuration"
 # @label "命名空间"
 variable "namespace" {
-  description = "Namespace for deploy"
+  description = "Namespace to deploy"
   type        = string 
 }
 
