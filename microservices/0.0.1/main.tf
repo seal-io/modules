@@ -4,35 +4,9 @@ terraform {
       source  = "gavinbunney/kubectl"
       version = "1.14.0"
     }
-    kubernetes = {
-      source = "hashicorp/kubernetes"
-    }
   }
 }
 
-variable "host" {
-  type = string
-}
-
-variable "client_certificate" {
-  type = string
-}
-
-variable "client_key" {
-  type = string
-}
-
-variable "cluster_ca_certificate" {
-  type = string
-}
-
-provider "kubernetes" {
-  host = var.host
-
-  client_certificate     = base64decode(var.client_certificate)
-  client_key             = base64decode(var.client_key)
-  cluster_ca_certificate = base64decode(var.cluster_ca_certificate)
-}
 
 resource "kubectl_manifest" "namespace" {
   yaml_body = <<YAML
@@ -57,8 +31,6 @@ resource "kubectl_manifest" "manifest" {
 
   count     = length(data.kubectl_path_documents.manifest.documents)
   yaml_body = element(data.kubectl_path_documents.manifest.documents, count.index)
-  #for_each  = toset(data.kubectl_path_documents.manifest.manifests)
-  #yaml_body = each.value
 }
 
 data "kubernetes_service" "service" {
