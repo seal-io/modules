@@ -29,7 +29,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/emailservice:v0.6.0
+        image: ${image_registry}/${image_repository}/emailservice:${image_version}
         ports:
         - containerPort: 8080
         env:
@@ -96,7 +96,7 @@ spec:
                 - ALL
             privileged: false
             readOnlyRootFilesystem: true
-          image: ${image_registry}/${image_repository}/checkoutservice:v0.6.0
+          image: ${image_registry}/${image_repository}/checkoutservice:${image_version}
           ports:
           - containerPort: 5050
           readinessProbe:
@@ -172,7 +172,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/recommendationservice:v0.6.0
+        image: ${image_registry}/${image_repository}/recommendationservice:${image_version}
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -243,7 +243,7 @@ spec:
                 - ALL
             privileged: false
             readOnlyRootFilesystem: true
-          image: ${image_registry}/${image_repository}/frontend:v0.6.0
+          image: ${image_registry}/${image_repository}/frontend:${image_version}
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -353,7 +353,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/paymentservice:v0.6.0
+        image: ${image_registry}/${image_repository}/paymentservice:${image_version}
         ports:
         - containerPort: 50051
         env:
@@ -419,7 +419,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/productcatalogservice:v0.6.0
+        image: ${image_registry}/${image_repository}/productcatalogservice:${image_version}
         ports:
         - containerPort: 3550
         env:
@@ -485,7 +485,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/cartservice:v0.6.0
+        image: ${image_registry}/${image_repository}/cartservice:${image_version}
         ports:
         - containerPort: 7070
         env:
@@ -579,7 +579,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/loadgenerator:v0.6.0
+        image: ${image_registry}/${image_repository}/loadgenerator:${image_version}
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"
@@ -623,7 +623,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/currencyservice:v0.6.0
+        image: ${image_registry}/${image_repository}/currencyservice:${image_version}
         ports:
         - name: grpc
           containerPort: 7000
@@ -689,7 +689,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/shippingservice:v0.6.0
+        image: ${image_registry}/${image_repository}/shippingservice:${image_version}
         ports:
         - containerPort: 50051
         env:
@@ -823,7 +823,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: ${image_registry}/${image_repository}/adservice:v0.6.0
+        image: ${image_registry}/${image_repository}/adservice:${image_version}
         ports:
         - containerPort: 9555
         env:
