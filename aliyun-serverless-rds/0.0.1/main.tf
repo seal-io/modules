@@ -3,6 +3,11 @@ variable "instance_name" {
   default = "seal-demo-serverless"
 }
 
+variable "db_name" {
+  description = "数据库名称"
+  default = "demodb"
+}
+
 variable "allocate_public_connection" {
   decription = "是否开通数据库互联网访问"
   type    = bool
@@ -40,20 +45,26 @@ resource "alicloud_vswitch" "example" {
 }
 
 resource "alicloud_db_instance" "example" {
-  engine                   = "MySQL"
-  engine_version           = "8.0"
-  instance_storage         = data.alicloud_db_instance_classes.example.instance_classes.0.storage_range.min
-  instance_type            = data.alicloud_db_instance_classes.example.instance_classes.0.instance_class
-  instance_charge_type     = "Serverless"
-  instance_name            = var.instance_name
-  zone_id                  = data.alicloud_db_zones.example.ids.1
-  vswitch_id               = alicloud_vswitch.example.id
-  db_instance_storage_type = "cloud_essd"
-  category                 = "serverless_basic"
+  engine                     = "MySQL"
+  engine_version             = "8.0"
+  instance_storage           = data.alicloud_db_instance_classes.example.instance_classes.0.storage_range.min
+  instance_type              = data.alicloud_db_instance_classes.example.instance_classes.0.instance_class
+  instance_charge_type       = "Serverless"
+  instance_name              = var.instance_name
+  allocate_public_connection = var.allocate_public_connection
+  zone_id                    = data.alicloud_db_zones.example.ids.1
+  vswitch_id                 = alicloud_vswitch.example.id
+  db_instance_storage_type   = "cloud_essd"
+  category                   = "serverless_basic"
   serverless_config {
     max_capacity = 8
     min_capacity = 0.5
     auto_pause   = false
     switch_force = false
   }
+}
+
+resource "alicloud_db_database" "example" {
+  instance_id = alicloud_db_instance.instance.id
+  name        = var.db_name
 }
