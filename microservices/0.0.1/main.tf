@@ -16,7 +16,7 @@ metadata:
 YAML
 }
 
-data "kubectl_flie_documents" "docs" {
+data "kubectl_file_documents" "docs" {
   content    = file("online-boutique-manifests.yaml")
   vars       = {
     namespace        = local.namespace
