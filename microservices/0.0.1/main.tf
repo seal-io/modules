@@ -36,11 +36,12 @@ data "kubernetes_service" "service" {
   depends_on = [kubectl_manifest.manifest]
 
   metadata {
-    name      = frontend-external
+    name      = local.frontend_service_name
     namespace = local.namespace
   }
 }
 
 locals {
-  namespace = coalesce(var.namespace, "${var.seal_metadata_project_name}-${var.seal_metadata_application_name}-${var.seal_metadata_application_instance_name}")
+  frontend_service_name = frontend-external
+  namespace             = coalesce(var.namespace, "${var.seal_metadata_project_name}-${var.seal_metadata_application_name}-${var.seal_metadata_application_instance_name}")
 }
