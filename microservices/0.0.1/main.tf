@@ -16,8 +16,8 @@ metadata:
 YAML
 }
 
-data "kubectl_path_documents" "manifest" {
-  pattern    = "./online-boutique-manifests.yaml"
+data "kubectl_flie_documents" "docs" {
+  content    = file("online-boutique-manifests.yaml")
   vars       = {
     namespace        = local.namespace
     image_registry   = var.image_registry
@@ -28,7 +28,7 @@ data "kubectl_path_documents" "manifest" {
 resource "kubectl_manifest" "manifest" {
   depends_on = [kubectl_manifest.namespace]
 
-  for_each  = toset(data.kubectl_path_documents.manifest.documents)
+  for_each  = toset(data.kubectl_path_documents.docs.manifests)
   yaml_body = each.value
 }
 
