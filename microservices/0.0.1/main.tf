@@ -18,7 +18,7 @@ YAML
 
 data "kubectl_path_documents" "manifest" {
   pattern    = "./online-boutique-manifests.yaml"
-  var        = {
+  vars       = {
     namespace        = local.namespace
     image_registry   = var.image_registry
     image_repository = var.image_repository
@@ -32,7 +32,7 @@ resource "kubectl_manifest" "manifest" {
   yaml_body = each.value
 }
 
-data "kubernetes_service" "frontend-external" {
+data "kubernetes_service" "service" {
   depends_on = [kubectl_manifest.manifest]
 
   metadata {
@@ -42,6 +42,5 @@ data "kubernetes_service" "frontend-external" {
 }
 
 locals {
-  name      = coalesce(var.name, "${var.seal_metadata_module_name}")
   namespace = coalesce(var.namespace, "${var.seal_metadata_project_name}-${var.seal_metadata_application_name}-${var.seal_metadata_application_instance_name}")
 }

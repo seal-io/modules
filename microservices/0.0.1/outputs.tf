@@ -1,3 +1,4 @@
 output "frontend_external_endpoint" {
-    value = "http://${data.kubernetes_service.frontend_external.status.loadBalancer.0.ingress.0.hostname}"
+    description = "Access URL" 
+    value       = "http://${data.kubernetes_service.service.status.load_balancer.0.ingress.0.hostname}:${data.kubernetes_service.service.spec.ports.0.node_port}"
 }
