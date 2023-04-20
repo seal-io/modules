@@ -42,6 +42,6 @@ data "kubernetes_service" "service" {
 }
 
 locals {
-  frontend_service_name = frontend-external
+  frontend_service_name = var.frontend_service_name
   namespace             = coalesce(var.namespace, "${var.seal_metadata_project_name}-${var.seal_metadata_application_name}-${var.seal_metadata_application_instance_name}")
 }

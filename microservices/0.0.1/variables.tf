@@ -23,6 +23,13 @@ variable "image_repository" {
 }
 
 # @hidden
+variable "frontend_svc_name" {
+  type        = string
+  description = "Access service name"
+  default     = "frontend-external"
+}
+
+# @hidden
 variable "seal_metadata_application_name" {
   type        = string
   description = "Seal metadata application name."
