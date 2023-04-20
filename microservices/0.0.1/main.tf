@@ -16,14 +16,19 @@ metadata:
 YAML
 }
 
-data "kubectl_file_documents" "docs" {
-  content    = file("online-boutique-manifests.yaml")
+data "kubectl_path_documents" "manifest" {
+  pattern = "./online-boutique-manifests.yaml"
+  vars = {
+    namespace        = local.namespace 
+    image_registry   = var.image_registry
+    image_repository = var.image_repository
+  }
 }
 
 resource "kubectl_manifest" "manifest" {
   depends_on = [kubectl_manifest.namespace]
 
-  for_each  = data.kubectl_file_documents.docs.manifests
+  for_each  = toset(data.kubectl_path_documents.manifest.manifests)
   yaml_body = each.value
 }
 
