@@ -4,6 +4,10 @@ resource "random_string" "password" {
 }
 
 resource "helm_release" "mysql" {
+  # disable wait for all resource be ready.
+  #
+  wait = false
+
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "mysql"
 
