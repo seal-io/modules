@@ -11,5 +11,6 @@ output "db_username" {
 }
 
 output "db_password" {
+  sensitive = true
   value = coalesce(var.password, random_string.password.result)
 }
