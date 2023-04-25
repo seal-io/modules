@@ -79,11 +79,11 @@ variable "sql_collector_config_value" {
 #################
 # @group "RDS Backup Policy"
 # @label "Preferred Backup Period"
-# @options ["40", "50", "60"]
+# @options ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 variable "preferred_backup_period" {
   description = "DB Instance backup period."
-  type        = number
-  default     = 40
+  type        = list(string)
+  default     = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 }
 # @group "RDS Backup Policy"
 # @label "Preferred Backup Time"
