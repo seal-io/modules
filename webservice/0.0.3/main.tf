@@ -39,10 +39,6 @@ module "deployment" {
 }
 
 module "service" {
-  # disable wait for load balancer be ready.
-  #
-  wait_for_load_balancer = false
-
   depends_on = [resource.kubectl_manifest.ns]
 
   source  = "terraform-iaac/service/kubernetes"
