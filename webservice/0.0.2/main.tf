@@ -61,6 +61,25 @@ data "kubernetes_service" "service" {
   }
 }
 
+data "kubernetes_resources" "nodes" {
+  api_version    = "v1"
+  kind           = "Node"
+  label_selector = "kubernetes.io/os=linux"
+}
+
+locals {
+  node_addresses = flatten([for val in data.kubernetes_resources.nodes.objects :
+    val["status"]["addresses"]
+  ])
+  node_external_ips = [for val in local.node_addresses :
+    val["address"] if val["type"] == "ExternalIP"
+  ]
+  node_internal_ips = [for val in local.node_addresses :
+    val["address"] if val["type"] == "InternalIP"
+  ]
+  node_ip = length(local.node_external_ips) != 0 ? local.node_external_ips[0] : length(local.node_internal_ips) != 0 ? local.node_internal_ips[0] : null
+}
+
 locals {
   name      = coalesce(var.name, "${var.seal_metadata_module_name}")
   namespace = coalesce(var.namespace, "${var.seal_metadata_project_name}-${var.seal_metadata_application_name}-${var.seal_metadata_application_instance_name}")
