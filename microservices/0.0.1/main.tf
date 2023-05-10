@@ -27,6 +27,7 @@ data "kubectl_path_documents" "manifest" {
 }
 
 resource "kubectl_manifest" "manifest" {
+  wait_for_rollout = false
   depends_on = [kubectl_manifest.namespace]
 
   count     = length(data.kubectl_path_documents.manifest.documents)
