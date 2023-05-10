@@ -51,7 +51,7 @@ spec:
             memory: 32Mi
           limits:
             cpu: 200m
-            memory: 128Mi
+            memory: 256Mi
 ---
 apiVersion: v1
 kind: Service
@@ -126,7 +126,7 @@ spec:
             memory: 32Mi
             limits:
               cpu: 200m
-              memory: 128Mi
+              memory: 256Mi
 ---
 apiVersion: v1
 kind: Service
@@ -293,7 +293,7 @@ spec:
             memory: 32Mi
             limits:
               cpu: 200m
-              memory: 128Mi
+              memory: 256Mi
 ---
 apiVersion: v1
 kind: Service
@@ -373,7 +373,7 @@ spec:
             memory: 32Mi
           limits:
             cpu: 200m
-            memory: 128Mi
+            memory: 256Mi
 ---
 apiVersion: v1
 kind: Service
@@ -439,7 +439,7 @@ spec:
             memory: 32Mi
           limits:
             cpu: 200m
-            memory: 128Mi
+            memory: 256Mi
 ---
 apiVersion: v1
 kind: Service
@@ -497,7 +497,7 @@ spec:
             memory: 32Mi
           limits:
             cpu: 300m
-            memory: 128Mi
+            memory: 256Mi
         readinessProbe:
           initialDelaySeconds: 15
           exec:
@@ -644,7 +644,7 @@ spec:
             memory: 32Mi
           limits:
             cpu: 200m
-            memory: 128Mi
+            memory: 256Mi
 ---
 apiVersion: v1
 kind: Service
@@ -710,7 +710,7 @@ spec:
             memory: 32Mi
           limits:
             cpu: 200m
-            memory: 128Mi
+            memory: 256Mi
 ---
 apiVersion: v1
 kind: Service
