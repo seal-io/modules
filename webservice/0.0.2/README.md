@@ -30,6 +30,7 @@ It will generate an access endpoint as output for your web service, allowing it 
 | Name | Type |
 |------|------|
 | [kubectl_manifest.ns](https://registry.terraform.io/providers/gavinbunney/kubectl/1.14.0/docs/resources/manifest) | resource |
+| [kubernetes_resources.nodes](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/resources) | data source |
 | [kubernetes_service.service](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/service) | data source |
 
 ## Inputs
@@ -50,6 +51,7 @@ It will generate an access endpoint as output for your web service, allowing it 
 
 | Name | Description |
 |------|-------------|
+| <a name="output_endpoints"></a> [endpoints](#output\_endpoints) | n/a |
 | <a name="output_ports"></a> [ports](#output\_ports) | Service Ports |
 | <a name="output_service_ip"></a> [service\_ip](#output\_service\_ip) | Service IP |
 <!-- END_TF_DOCS -->
