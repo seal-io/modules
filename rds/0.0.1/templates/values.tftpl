@@ -1,0 +1,61 @@
+{
+  "fullnameOverride": "${name}",
+
+  "architecture": "${architecture}",
+
+  "image": {
+    "repository": "${image.repository}",
+    "tag": "${image.tag}"
+  },
+
+  "auth": {
+    "database": "${auth.database}",
+    "username": "${auth.username}"
+  },
+
+  "primary": {
+    "name": "primary",
+%{ if init_sql_url != "" }
+    "initContainers": [
+      {
+        "name": "init-sql",
+        "image": "alpine",
+        "command": [ "wget", "-c", "-S", "-P", "/docker-entrypoint-initdb.d", "${init_sql_url}" ],
+        "volumeMounts": [
+          {
+            "name": "init-sql",
+            "mountPath": "/docker-entrypoint-initdb.d"
+          }
+        ]
+      }
+    ],
+%{ endif }
+    "persistence": {
+      "enabled": ${persistence.enabled},
+    },
+    "extraVolumeMounts":[
+      {
+        "name": "init-sql",
+        "mountPath": "/docker-entrypoint-initdb.d"
+      }
+    ],
+    "extraVolumes": [
+      {
+        "name": "init-sql",
+        "emptyDir": {}
+      }
+    ]
+  },
+
+%{ if chart == "postgresql" }
+  "readReplicas": {
+%{ else }
+  "secondary": {
+%{ endif }
+    "name": "secondary",
+    "persistence": {
+      "enabled": ${persistence.enabled}
+    }
+  },
+
+}
