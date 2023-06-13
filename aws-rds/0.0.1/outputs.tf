@@ -1,17 +1,36 @@
-output "rds_hostname" {
-  description = "RDS instance hostname"
-  value       = aws_db_instance.education.address
-  sensitive   = true
+output "db_endpoint" {
+  value = local.endpoint
 }
 
-output "rds_port" {
-  description = "RDS instance port"
-  value       = aws_db_instance.education.port
-  sensitive   = true
+output "db_host" {
+  value = local.host
 }
 
-output "rds_username" {
-  description = "RDS instance root username"
-  value       = aws_db_instance.education.username
-  sensitive   = true
+output "db_endpoint_replica" {
+  value = local.endpoint_replica
+}
+
+output "db_host_replica" {
+  value = local.host_replica
+}
+
+output "db_driver" {
+  value = local.driver
+}
+
+output "db_port" {
+  value = local.port
+}
+
+output "db_name" {
+  value = local.database
+}
+
+output "db_username" {
+  value = local.username
+}
+
+output "db_password" {
+  sensitive = true
+  value     = local.password
 }
