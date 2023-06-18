@@ -37,7 +37,7 @@ module "seed" {
 
   depends_on = [module.aws]
 
-  source_address = "https://raw.githubusercontent.com/seal-io/terraform-provider-byteset/main/byteset/testdata/mysql.sql"
+  source_address = "https://raw.githubusercontent.com/seal-io/terraform-provider-byteset/main/byteset/testdata/mysql-lg.sql"
   destination_address = format("%s://%s:%s@%s/%s%s",
     module.aws.db_driver,
     module.aws.db_username,
@@ -46,4 +46,8 @@ module "seed" {
     module.aws.db_name,
     (contains(["postgres"], module.aws.db_driver) ? "?sslmode=disable" : "")
   )
+}
+
+output "seed_cost" {
+  value = module.seed.cost
 }

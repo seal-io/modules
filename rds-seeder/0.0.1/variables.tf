@@ -30,7 +30,24 @@ variable "destination_address" {
 variable "destination_conn_max" {
   type        = number
   description = "Specify the connection maximum value of destination."
-  default     = 25
+  default     = 5
+
+  validation {
+    condition     = var.destination_conn_max > 0
+    error_message = "Invalid destination connection maximum value"
+  }
+}
+
+# @label "Destination Batch Capacity"
+variable "destination_batch_cap" {
+  type        = number
+  description = "Specify the (insertion) batch capacity value of destination."
+  default     = 500
+
+  validation {
+    condition     = var.destination_batch_cap > 0
+    error_message = "Invalid destination (insertion) batch capacity value"
+  }
 }
 
 ###########################

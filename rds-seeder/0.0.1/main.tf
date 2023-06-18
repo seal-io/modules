@@ -11,9 +11,10 @@ locals {
 }
 
 locals {
-  source_address       = var.source_address
-  destination_address  = var.destination_address
-  destination_conn_max = var.destination_conn_max
+  source_address        = var.source_address
+  destination_address   = var.destination_address
+  destination_conn_max  = var.destination_conn_max
+  destination_batch_cap = var.destination_batch_cap
 }
 
 #
@@ -26,9 +27,10 @@ resource "byteset_pipeline" "rds" {
   }
 
   destination = {
-    address  = local.destination_address
-    conn_max = local.destination_conn_max
-    salt     = local.identifier
+    address   = local.destination_address
+    conn_max  = local.destination_conn_max
+    batch_cap = local.destination_batch_cap
+    salt      = local.identifier
   }
 }
 
@@ -36,5 +38,6 @@ resource "byteset_pipeline" "rds" {
 # Get id.
 #
 locals {
-  id = byteset_pipeline.rds.id
+  id   = byteset_pipeline.rds.id
+  cost = byteset_pipeline.rds.cost
 }
