@@ -234,7 +234,7 @@ locals {
   seal_metadata_environment_name = coalesce(var.seal_metadata_environment_name, "example")
   seal_metadata_service_name     = coalesce(var.seal_metadata_service_name, "awsrds")
 
-  identifier = join("-", [local.seal_metadata_project_name, local.seal_metadata_environment_name, local.var.seal_metadata_service_name])
+  identifier = join("-", [local.seal_metadata_project_name, local.seal_metadata_environment_name, local.seal_metadata_service_name])
 }
 
 locals {
