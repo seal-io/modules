@@ -44,7 +44,7 @@ variable "password" {
 # @label "Username"
 variable "username" {
   type        = string
-  description = "Specify the root username to initialize after launching, 'MySQL' and 'MariaDB' engines don't allow 'root'."
+  description = "Specify the root username to initialize after launching."
   default     = "rdsusr"
 
   validation {

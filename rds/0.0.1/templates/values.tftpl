@@ -10,7 +10,9 @@
 
   "auth": {
     "database": "${auth.database}",
+%{ if chart == "postgresql" || auth.username != "root" }
     "username": "${auth.username}"
+%{ endif }
   },
 
   "primary": {
