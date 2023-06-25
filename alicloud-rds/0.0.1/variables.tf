@@ -107,7 +107,7 @@ variable "init_sql_url" {
 # @group "Advanced"
 # @label "Publicly Accessible"
 variable "publicly_accessible" {
-  type        = string
+  type        = bool
   description = "Specify to allow publicly accessing."
   default     = false
 }
