@@ -43,6 +43,7 @@ module "mysql" {
 
   engine       = "MySQL-8.0"
   architecture = "Replication"
+  username     = "root"
   password     = random_string.password.result
 
   emphemeral_storage = true
