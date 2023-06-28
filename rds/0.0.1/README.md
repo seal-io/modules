@@ -42,7 +42,7 @@ No modules.
 | <a name="input_engine"></a> [engine](#input\_engine) | Select the RDS engine, support serval kinds of 'MySQL', 'MariaDB' and 'PostgreSQL'. | `string` | n/a | yes |
 | <a name="input_architecture"></a> [architecture](#input\_architecture) | Select the RDS architecture, support from 'Standalone' and 'Replication'. | `string` | n/a | yes |
 | <a name="input_password"></a> [password](#input\_password) | Specify the root password to initialize after launching. | `string` | n/a | yes |
-| <a name="input_username"></a> [username](#input\_username) | Specify the root username to initialize after launching, 'MySQL' and 'MariaDB' engines don't allow 'root'. | `string` | `"rdsusr"` | no |
+| <a name="input_username"></a> [username](#input\_username) | Specify the root username to initialize after launching. | `string` | `"rdsusr"` | no |
 | <a name="input_database"></a> [database](#input\_database) | Specify the database name to initialize after launching. | `string` | `"rdsdb"` | no |
 | <a name="input_emphemeral_storage"></a> [emphemeral\_storage](#input\_emphemeral\_storage) | Specify to use emphemeral storage, which is nice for testing. | `bool` | `false` | no |
 | <a name="input_init_sql_url"></a> [init\_sql\_url](#input\_init\_sql\_url) | Specify the init SQL download URL to initialize after launching. | `string` | `""` | no |
