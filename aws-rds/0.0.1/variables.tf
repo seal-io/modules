@@ -32,6 +32,7 @@ variable "architecture" {
 # @label "Password"
 variable "password" {
   type        = string
+  sensitive   = true
   description = "Specify the root password to initialize after launching."
 
   validation {
