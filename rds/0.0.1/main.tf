@@ -89,11 +89,7 @@ locals {
 #
 
 locals {
-  seal_metadata_project_name     = coalesce(var.seal_metadata_project_name, "example")
-  seal_metadata_environment_name = coalesce(var.seal_metadata_environment_name, "example")
   seal_metadata_service_name     = coalesce(var.seal_metadata_service_name, "rds")
-
-  identifier = join("-", [local.seal_metadata_project_name, local.seal_metadata_environment_name, local.seal_metadata_service_name])
 }
 
 locals {
@@ -101,7 +97,7 @@ locals {
 
   architecture = var.architecture
 
-  namespace  = local.identifier
+  namespace  = coalesce(var.seal_metadata_namespace_name, "example")
   name       = local.seal_metadata_service_name
   chart      = lookup(local.engineInfo, "chart")
   repository = lookup(local.engineInfo, "repository")
@@ -124,7 +120,6 @@ resource "helm_release" "rds" {
   repository       = "https://charts.bitnami.com/bitnami"
   chart            = local.chart
   wait             = false
-  create_namespace = true
   max_history      = 3
 
   namespace = local.namespace
