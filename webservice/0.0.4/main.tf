@@ -7,21 +7,10 @@ terraform {
   }
 }
 
-resource "kubectl_manifest" "ns" {
-  yaml_body = <<YAML
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: ${local.namespace}
-YAML
-}
-
 module "deployment" {
   # disable wait for all pods be ready.
   #
   wait_for_rollout = false
-
-  depends_on = [resource.kubectl_manifest.ns]
 
   source  = "terraform-iaac/deployment/kubernetes"
   version = "1.4.2"
@@ -39,7 +28,6 @@ module "deployment" {
 }
 
 module "service" {
-  depends_on = [resource.kubectl_manifest.ns]
 
   source  = "terraform-iaac/service/kubernetes"
   version = "1.0.4"
@@ -67,5 +55,5 @@ data "kubernetes_service" "service" {
 
 locals {
   name      = coalesce(var.name, "${var.seal_metadata_service_name}")
-  namespace = coalesce(var.namespace, "${var.seal_metadata_project_name}-${var.seal_metadata_environment_name}-${var.seal_metadata_service_name}")
+  namespace = coalesce(var.namespace, var.seal_metadata_namespace_name)
 }
