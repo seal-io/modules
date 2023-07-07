@@ -1,8 +1,8 @@
 terraform {
   required_providers {
     kaniko = {
-      source  = "gitlawr/kaniko"
-      version = "0.0.1-dev1"
+      source  = "seal-io/kaniko"
+      version = "0.0.1"
     }
   }
 }
